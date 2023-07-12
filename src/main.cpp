@@ -115,6 +115,10 @@ void loop()
             logger.info("Update Cycle");
             if (gps.isSafe())
             {
+                // if LMIC is busy, just skip
+                if (LMIC.opmode & (OP_POLL | OP_TXDATA | OP_TXRXPEND))
+                    info_LORA.update("BUSY");
+                    return;
                 gps.formGPSMessage(msg);
                 lorawan.SendBuffer(msg, 9);
             }
