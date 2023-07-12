@@ -116,7 +116,7 @@ void loop()
             if (gps.isSafe())
             {
                 // if LMIC is busy, just skip
-                if (LMIC.opmode & (OP_POLL | OP_TXDATA | OP_TXRXPEND))
+                if (LMIC.opmode & (OP_JOINING))
                     info_LORA.update("BUSY");
                     return;
                 gps.formGPSMessage(msg);
